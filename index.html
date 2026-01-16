@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" href="data:image/x-icon;,">
+<style>
+body { font-family: sans-serif; }
+</style>
+<title>'Enter' Keypress Example</title>
+</head>
+<body>
+<h1>'Enter' Keypress Example</h1>
+<p>This page will detect <kbd>Enter</kbd> being pressed anywhere on the page, will consume the event (so it cannot affect other elements), and ignore key repeats if the button is held.</p>
+
+<output>-</output>
+
+<h2>Elements to test</h2>
+<input type="text" placeholder="Text input"><br>
+<button>Button</button><br>
+<textarea>Text area...</textarea><br>
+<hr>
+
+<script>
+// TODO: Do something useful in this event handler
+function handleEnter() {
+	// For now, just log the event
+	const message = 'Enter key pressed at ' + (new Date()).getTime();
+	console.log(message);
+	const output = document.querySelector('output');
+	if (output) output.textContent = message;
+}
+
+// Globally listen for 'Enter' key presses
+document.addEventListener('keydown', function(event) {
+	if (event.key === 'Enter') {
+		event.preventDefault();
+		if (!event.repeat) {
+			handleEnter();
+		}
+	}
+}, { capture: true });
+</script>
+
+</body>
+</html>
